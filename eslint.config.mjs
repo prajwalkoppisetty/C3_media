@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Vendored dev-only React Grab bundle (loaded via <Script> in dev)
+    "public/react-grab.global.js",
   ]),
 ]);
 
