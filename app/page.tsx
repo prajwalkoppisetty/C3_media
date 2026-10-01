@@ -1,69 +1,171 @@
 import Image from "next/image";
+import Link from "next/link";
+import Reveal from "@/components/Reveal";
+import CtaBox from "@/components/CtaBox";
+import ServiceIcon from "@/components/ServiceIcon";
+import { serviceDetails } from "@/lib/content";
 
 export default function Home() {
+  const preview = serviceDetails.slice(0, 3);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <>
+      <section className="hero" id="home">
+        <div className="hero-inner container">
+          <Reveal>
             <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+              className="hero-logo hero-float"
+              src="/logo.png"
+              alt="C3 Media Co"
+              width={132}
+              height={132}
+              priority
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="hero-badge">
+              <span className="hero-dot" aria-hidden />
+              Design · Develop · Deliver
+            </div>
+            <h1>
+              <span>
+                We build the <span className="hero-gradient">digital side</span>
+              </span>
+              <span>of ambitious ideas.</span>
+            </h1>
+            <p className="sub">
+              Websites. Apps. Brands. Motion. 3D. From the first concept to the
+              final launch, C³ brings design, development and creative
+              production together.
+            </p>
+            <div className="hero-chips" aria-label="What we do">
+              {["Websites", "Apps", "Brands", "Motion", "3D"].map((c) => (
+                <span key={c} className="hero-chip">
+                  {c}
+                </span>
+              ))}
+            </div>
+            <div className="hero-actions">
+              <Link className="btn primary hero-cta" href="/contact">
+                Tell us your idea <span aria-hidden>↗</span>
+              </Link>
+              <Link className="btn secondary" href="/services">
+                Explore services
+              </Link>
+            </div>
+            <div className="hero-meta">
+              <div>
+                Built for <strong>Startups &amp; Brands</strong>
+              </div>
+              <div>
+                Focus <strong>Design + Development</strong>
+              </div>
+              <div>
+                Approach <strong>Human-first</strong>
+              </div>
+            </div>
+          </Reveal>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 20 }}>
+        <div className="container">
+          <Reveal className="section-head">
+            <div>
+              <div className="eyebrow">Explore</div>
+              <h2>Everything lives on its own page.</h2>
+            </div>
+            <p>
+              No more scrolling one giant page. Jump straight to what you need —
+              each section is now a dedicated page.
+            </p>
+          </Reveal>
+          <div className="page-links">
+            <Reveal>
+              <Link className="page-link-card" href="/services">
+                <div>
+                  <h3>Services →</h3>
+                  <p>Web, apps, video, 3D and branding. 10 offerings in detail.</p>
+                </div>
+                <span className="arrow">↗</span>
+              </Link>
+            </Reveal>
+            <Reveal>
+              <Link className="page-link-card" href="/process">
+                <div>
+                  <h3>Process →</h3>
+                  <p>Tell us → Plan → Build → Deliver. Simple from first message to launch.</p>
+                </div>
+                <span className="arrow">↗</span>
+              </Link>
+            </Reveal>
+            <Reveal>
+              <Link className="page-link-card" href="/about">
+                <div>
+                  <h3>About →</h3>
+                  <p>Small team, big digital thinking. Who we are and how we work.</p>
+                </div>
+                <span className="arrow">↗</span>
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="container">
+          <Reveal className="section-head">
+            <div>
+              <div className="eyebrow">What we do</div>
+              <h2>One team for your digital presence.</h2>
+            </div>
+            <p>A quick preview — see the full breakdown on the Services page.</p>
+          </Reveal>
+          <div className="services">
+            {preview.map((s) => (
+              <Reveal key={s.n}>
+                <article className="service">
+                  <div className="icon">
+                    <ServiceIcon name={s.icon} />
+                  </div>
+                  <h3>{s.title}</h3>
+                  <p>{s.body}</p>
+                  <div className="tags">
+                    {s.tags.map((t) => (
+                      <span key={t} className="tag">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+          <div style={{ marginTop: 26 }}>
+            <Link className="btn secondary" href="/services">
+              View all 10 services ↗
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <CtaBox
+        eyebrow="Have an idea?"
+        title={
+          <>
+            Let&apos;s build something <span className="gold">extraordinary.</span>
+          </>
+        }
+        text="Tell us what you're planning. The form takes around two minutes and gives us enough context to start the conversation."
+        actions={
+          <>
+            <Link className="btn primary" href="/contact">
+              Start a project ↗
+            </Link>
+            <Link className="btn secondary" href="/process">
+              See how it works
+            </Link>
+          </>
+        }
+      />
+    </>
   );
 }
