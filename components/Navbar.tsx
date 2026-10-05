@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { site } from "@/lib/site";
+import { trackBloom } from "@/lib/bloom";
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
@@ -19,13 +20,6 @@ export default function Navbar() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
-
-  // Track cursor inside the CTA so the gold bloom spreads from the hover point
-  function trackCursor(e: React.MouseEvent<HTMLAnchorElement>) {
-    const r = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
-    e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
-  }
 
   return (
     <div className="nav-wrap">
@@ -57,8 +51,8 @@ export default function Navbar() {
           <Link
             className="nav-cta"
             href="/contact"
-            onMouseMove={trackCursor}
-            onMouseEnter={trackCursor}
+            onMouseMove={trackBloom}
+            onMouseEnter={trackBloom}
           >
             Start a Project ↗
           </Link>

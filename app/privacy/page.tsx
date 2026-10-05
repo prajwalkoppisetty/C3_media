@@ -14,7 +14,7 @@ const sections = [
   },
   {
     h: "2. How we use it",
-    p: "We use your information only to understand your requirements, prepare scope and quotations, communicate with you about your project, and improve our services. We do not sell your data, and we do not share it with third parties for marketing.",
+    p: "We use your information only to understand your requirements, prepare scope and quotations, communicate with you about your project, and improve our services. We do not sell your data, and we do not share it with third parties for marketing. When you submit the Start a Project form, your answers are delivered to our inbox by Resend, our email-delivery provider, which processes the message solely to transmit it.",
   },
   {
     h: "3. Storage on your device",
