@@ -7,6 +7,8 @@ import CtaBox from "@/components/CtaBox";
 export const metadata: Metadata = {
   title: "Work — C³ Media Co.",
   description: "Selected work from C³ Media Co. — websites, apps, branding, video and 3D.",
+  // Parked until the real portfolio launches: reachable by URL, invisible to crawlers
+  robots: { index: false, follow: false },
 };
 
 const projects = [

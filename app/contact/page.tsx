@@ -22,6 +22,15 @@ export default function ContactPage() {
   const [features, setFeatures] = useState<string[]>([]);
   const [typeError, setTypeError] = useState<string | null>(null);
   const [otherType, setOtherType] = useState("");
+  // One token per form visit doubles as Resend's idempotency key: a retry of
+  // the SAME failed attempt reuses it (no duplicate email), while starting
+  // over mints a fresh one so the new brief is a genuinely new delivery.
+  const newSubmitToken = () =>
+    typeof crypto !== "undefined" &&
+    typeof crypto.randomUUID === "function"
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  const [submitToken, setSubmitToken] = useState(newSubmitToken);
   const [sendError, setSendError] = useState<string | null>(null);
   const [pages, setPages] = useState(pageOptions[0]);
   const [timeline, setTimeline] = useState(timelineOptions[0]);
@@ -277,6 +286,8 @@ export default function ContactPage() {
                     {sendError}
                   </p>
                 )}
+                {/* M1 idempotency token: retries reuse it, fresh briefs mint a new one. */}
+                <input type="hidden" name="submitToken" value={submitToken} />
                 {/* Honeypot: invisible to humans, irresistible to bots */}
                 <input
                   type="text"
@@ -293,20 +304,21 @@ export default function ContactPage() {
                 <div className="eyebrow">Inquiry sent</div>
                 <h3 style={{ marginTop: 12 }}>Thank you — we&apos;ve got your brief.</h3>
                 <p>
-                  Our team will review it and get back to you within 24 hours
-                  on email or WhatsApp. In a hurry? Skip the wait and chat
-                  with us right now.
+                  Our team will review it and get back to you within
+                  1–2 business days on email or WhatsApp. In a hurry? Skip
+                  the wait and chat with us right now.
                 </p>
                 <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-                  <a
-                    className="btn primary"
+                    <a
+                    className="btn primary btn-bloom"
                     href={site.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={trackBloom}
                   >
                     Chat on WhatsApp ↗
                   </a>
-                  <Link className="btn secondary" href="/">
+                  <Link className="btn secondary btn-bloom" href="/" onClick={trackBloom}>
                     Back to home
                   </Link>
                 </div>
@@ -324,6 +336,8 @@ export default function ContactPage() {
                       setSendError(null);
                       setSent(false);
                       setStep(1);
+                      // New brief = new delivery: mint a fresh idempotency token.
+                      setSubmitToken(newSubmitToken());
                     }}
                     style={{
                       background: "none",

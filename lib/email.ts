@@ -26,7 +26,7 @@ export function getResend(): Resend {
 }
 
 export function contactTo(): string {
-  return process.env.CONTACT_TO ?? "hello@c3media.co";
+  return process.env.CONTACT_TO ?? "ccubemedia.co@gmail.com";
 }
 
 function esc(s: string): string {

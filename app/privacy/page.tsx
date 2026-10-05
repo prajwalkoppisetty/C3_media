@@ -30,7 +30,7 @@ const sections = [
   },
   {
     h: "6. Your rights",
-    p: "You may ask us at any time what information we hold about you, ask us to correct it, or ask us to delete it, by writing to hello@c3media.co. We will respond within a reasonable time.",
+    p: "You may ask us at any time what information we hold about you, ask us to correct it, or ask us to delete it, by writing to ccubemedia.co@gmail.com. We will respond within a reasonable time.",
   },
   {
     h: "7. Changes to this policy",

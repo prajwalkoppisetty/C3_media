@@ -40,6 +40,13 @@ export async function submitInquiry(
   // Honeypot: bots fill it, humans never see it. Smile and pretend.
   if (str(formData.get("company_website"))) return { ok: true };
 
+  // Idempotency token minted per form visit (hidden field). A retry of the
+  // same failed attempt reuses it so Resend delivers once; junk fails
+  // closed to a normal (non-deduped) send. Fresh briefs mint a new token.
+  const rawToken = str(formData.get("submitToken"));
+  const submitToken =
+    /^[A-Za-z0-9-]{8,100}$/.test(rawToken) ? rawToken : undefined;
+
   // NOTE: no rate limiting here yet (pre-launch traffic). Before any
   // marketing push, add a Vercel Firewall rate-limit rule or Upstash
   // throttling — otherwise the Resend quota and inbox are exposed.
@@ -86,16 +93,21 @@ export async function submitInquiry(
   }
 
   try {
-    await getResend().emails.send({
-      // Test identity until the domain is verified in Phase 4;
-      // replyTo routes replies straight to the inquirer.
-      from: "C³ Website <onboarding@resend.dev>",
-      to: contactTo(),
-      replyTo: inquiry.email,
-      subject: inquirySubject(inquiry),
-      html: inquiryHtml(inquiry),
-      text: inquiryText(inquiry),
-    });
+    await getResend().emails.send(
+      {
+        // Test identity until the domain is verified in Phase 4;
+        // replyTo routes replies straight to the inquirer.
+        from: "C³ Website <onboarding@resend.dev>",
+        to: contactTo(),
+        replyTo: inquiry.email,
+        subject: inquirySubject(inquiry),
+        html: inquiryHtml(inquiry),
+        text: inquiryText(inquiry),
+      },
+      // Same token = same logical attempt: Resend collapses network-lost
+      // retries into one delivery instead of duplicate emails.
+      submitToken ? { idempotencyKey: submitToken } : undefined,
+    );
     return { ok: true };
   } catch (e) {
     // Visible in Vercel/server logs only — never leaks internals to visitors.
