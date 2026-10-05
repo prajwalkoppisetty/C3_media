@@ -46,7 +46,7 @@ const sections = [
   },
   {
     h: "10. Contact",
-    p: "Questions about these terms: hello@c3media.co. Last updated: October 2026.",
+    p: "Questions about these terms: ccubemedia.co@gmail.com. Last updated: October 2026.",
   },
 ];
 

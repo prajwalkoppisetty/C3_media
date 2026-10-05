@@ -91,30 +91,36 @@ export default function ThemeToggle() {
       document.body.appendChild(el);
       return el;
     };
-    // soft gold wash that flows outward…
-    const wash = mk({ background: "rgba(214,166,83,.16)" });
-    // …edged by a crisp ring right behind it
-    const ring = mk({
-      border: "2px solid rgba(214,166,83,.6)",
-      background: "transparent",
-    });
-    const flow = {
-      duration: 750,
-      easing: "cubic-bezier(.16,1,.3,1)",
-      fill: "forwards" as const,
-    };
-    wash.animate(
-      { transform: [`${at} scale(0)`, `${at} scale(1)`], opacity: [1, 0] },
-      flow
-    ).onfinish = () => wash.remove();
-    const ringAnim = ring.animate(
-      { transform: [`${at} scale(0)`, `${at} scale(1)`], opacity: [1, 0] },
-      { ...flow, duration: 900 }
-    );
-    ringAnim.onfinish = () => {
-      ring.remove();
+    // L1: if WAAPI is ever unavailable the guard must not stay stuck —
+    // the theme itself is already applied above, so just release it.
+    try {
+      // soft gold wash that flows outward…
+      const wash = mk({ background: "rgba(214,166,83,.16)" });
+      // …edged by a crisp ring right behind it
+      const ring = mk({
+        border: "2px solid rgba(214,166,83,.6)",
+        background: "transparent",
+      });
+      const flow = {
+        duration: 750,
+        easing: "cubic-bezier(.16,1,.3,1)",
+        fill: "forwards" as const,
+      };
+      wash.animate(
+        { transform: [`${at} scale(0)`, `${at} scale(1)`], opacity: [1, 0] },
+        flow
+      ).onfinish = () => wash.remove();
+      const ringAnim = ring.animate(
+        { transform: [`${at} scale(0)`, `${at} scale(1)`], opacity: [1, 0] },
+        { ...flow, duration: 900 }
+      );
+      ringAnim.onfinish = () => {
+        ring.remove();
+        busy.current = false;
+      };
+    } catch {
       busy.current = false;
-    };
+    }
     },
     [apply, theme]
   );

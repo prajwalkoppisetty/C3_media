@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   description:
     "C³ Media Co. — design, development, video and creative production. Explore services, process, about and contact.",
-  icons: { icon: "/logo.png", apple: "/logo.png" },
+  icons: { icon: "/icon-32.png", apple: "/logo.png" },
   openGraph: {
     type: "website",
     siteName: "C³ Media Co.",

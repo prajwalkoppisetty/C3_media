@@ -6,13 +6,7 @@ export const site = {
   tagline: "Design · Develop · Deliver",
   whatsapp: "https://wa.me/6309805170",
   whatsappLabel: "Chat with C³",
-  email: "hello@c3media.co",
-  socials: {
-    instagram: "#",
-    linkedin: "#",
-    whatsapp: "https://wa.me/6309805170",
-    email: "mailto:hello@c3media.co",
-  },
+  email: "ccubemedia.co@gmail.com",
   nav: [
     { label: "Home", href: "/" },
     { label: "Services", href: "/services" },

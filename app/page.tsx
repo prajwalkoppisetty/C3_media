@@ -3,13 +3,27 @@ import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import CtaBox from "@/components/CtaBox";
 import ServiceIcon from "@/components/ServiceIcon";
+import { site } from "@/lib/site";
 import { serviceDetails } from "@/lib/content";
 
 export default function Home() {
   const preview = serviceDetails.slice(0, 3);
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: site.name,
+    slogan: site.tagline,
+    url: site.url,
+    email: site.email,
+    telephone: "+91-6309805170",
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <section className="hero" id="home">
         <div className="hero-inner container">
           <Reveal>
