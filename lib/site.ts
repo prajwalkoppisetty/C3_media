@@ -4,13 +4,13 @@ export const site = {
   // at deploy time — sitemap, robots and social previews inherit it.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://c3media.co",
   tagline: "Design · Develop · Deliver",
-  whatsapp: "https://wa.me/XXXXXXXXXX",
+  whatsapp: "https://wa.me/6309805170",
   whatsappLabel: "Chat with C³",
   email: "hello@c3media.co",
   socials: {
     instagram: "#",
     linkedin: "#",
-    whatsapp: "https://wa.me/XXXXXXXXXX",
+    whatsapp: "https://wa.me/6309805170",
     email: "mailto:hello@c3media.co",
   },
   nav: [
